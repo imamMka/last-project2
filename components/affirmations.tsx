@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 
-export default function App() {
+export default function Affirmation() {
   const [afirmation, setAfirmation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   

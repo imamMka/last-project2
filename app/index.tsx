@@ -1,90 +1,112 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
-
-type InsultResponse = {
-  number: string;
-  languange: string;
-  insult: string;
-  created: string;
-  shown: string;
-  createdBy: string;
-  active: string;
-  comment: string;
-};
+import { LinearGradient } from "expo-linear-gradient";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
-  const [insult, setInsult] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  
-  const fetchInsult = async () => {
-  try {
-    setLoading(true);
-    const url = `https://evilinsult.com/generate_insult.php?lang=en&type=json&timestamp=${Date.now()}`;
-    const response = await axios.get<InsultResponse>(url);
-    setInsult(response.data.insult);
-  } catch (error) {
-    console.error(error);
-    setInsult("Failed to fetch insult");
-  } finally {
-    setLoading(false);
-  }
-};
-  useEffect(() => {
-    fetchInsult();
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Daily Insult</Text>
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <Text style={styles.insult}>{insult}</Text>
-      )}
-      <TouchableOpacity style={styles.button} onPress={fetchInsult}>
-        <Text style={styles.buttonText}>Get New Insult</Text>
-      </TouchableOpacity>
-    </View>
-  );  
+    <SafeAreaView style={styles.containerParent}>
+      <View style={styles.navbar}>
+        <Image
+          style={{ width: 59, height: 32, }}
+          source={require("@/assets/images/app-logo.png")}
+        />
+      </View>
+
+      <View style={styles.containerChild}>
+        {/* LEFT GRADIENT */}
+        <LinearGradient
+          colors={["#FBD6FF", "#FFFFFF", "#A3D8FF"]}
+          start={{ x: 0.2, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.containerLeft}
+        >
+          <Text style={styles.textLeft}>Need Some Positivity Today.....?</Text>
+          <TouchableOpacity style={styles.buttonLight}>
+            <Text style={{ fontSize: 20, textAlign: "center" }}>
+              Affirmation
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+
+        {/* RIGHT GRADIENT */}
+        <LinearGradient
+          colors={["#8A0F28", "#0B0B0D", "#3A0F55"]}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.containerRight}
+        >
+          <Text style={styles.textRight}>Or do you want the harsh truth…?</Text>
+          <View style={styles.shadowWrapper}>
+            <TouchableOpacity style={styles.buttonDark}>
+              <Text
+                style={{ fontSize: 20, textAlign: "center", color: "#EDEDED" }}
+              >
+                Insult
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      </View>
+    </SafeAreaView>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
+const styles = {
+  navbar: {
+    position: "absolute",
+    top: 45,
+    left: 20,
+    zIndex: 10,
+  },
+  containerParent: {
+    flex: 1,
+  },
+  containerChild: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  containerLeft: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     padding: 20,
-    backgroundColor: "#f5f5f5",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+  containerRight: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
   },
-  insult: {
-    fontSize: 18,
-    fontStyle: "italic",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "#ffffff",
+  textLeft: {
     fontSize: 16,
+    color: "#000000",
+    textAlign: "center",
   },
-});
- 
-  
+  textRight: {
+    fontSize: 16,
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  buttonLight: {
+    marginTop: 20,
+    backgroundColor: "#A3D8FF",
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+    borderRadius: 12,
+  },
+  buttonDark: {
+    marginTop: 20,
+    backgroundColor: "#220A2E",
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+    borderRadius: 12,
+    shadowColor: "rgba(143, 0, 255, 0.6)",
+    shadowOffset: { width: -2, height: -3 },
+    shadowOpacity: 1,
+    shadowRadius: 3,
+  },
+  shadowWrapper: {
+    shadowColor: "rgba(138, 15, 40, 0.6)",
+    shadowOffset: { width: 2, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 3,
+  },
+};
