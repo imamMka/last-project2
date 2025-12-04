@@ -1,13 +1,18 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
+import { useRouter } from "expo-router";
+
 
 export default function App() {
+const router = useRouter();
+
   return (
     <SafeAreaView style={styles.containerParent}>
       <View style={styles.navbar}>
         <Image
-          style={{ width: 59, height: 32, }}
+          style={{ width: 59, height: 32 }}
           source={require("@/assets/images/app-logo.png")}
         />
       </View>
@@ -16,12 +21,12 @@ export default function App() {
         {/* LEFT GRADIENT */}
         <LinearGradient
           colors={["#FBD6FF", "#FFFFFF", "#A3D8FF"]}
-          start={{ x: 0.2, y: 0 }}
+          start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.containerLeft}
         >
           <Text style={styles.textLeft}>Need Some Positivity Today.....?</Text>
-          <TouchableOpacity style={styles.buttonLight}>
+          <TouchableOpacity style={styles.buttonLight} onPress={() => router.push("/affirmation")}>
             <Text style={{ fontSize: 20, textAlign: "center" }}>
               Affirmation
             </Text>
@@ -37,7 +42,7 @@ export default function App() {
         >
           <Text style={styles.textRight}>Or do you want the harsh truth…?</Text>
           <View style={styles.shadowWrapper}>
-            <TouchableOpacity style={styles.buttonDark}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => router.push("/insult")}>
               <Text
                 style={{ fontSize: 20, textAlign: "center", color: "#EDEDED" }}
               >
@@ -98,13 +103,13 @@ const styles = {
     paddingVertical: 8,
     paddingHorizontal: 8,
     borderRadius: 12,
-    shadowColor: "rgba(143, 0, 255, 0.6)",
+    shadowColor: "#8f00ff99",
     shadowOffset: { width: -2, height: -3 },
     shadowOpacity: 1,
     shadowRadius: 3,
   },
   shadowWrapper: {
-    shadowColor: "rgba(138, 15, 40, 0.6)",
+    shadowColor: "#8a0f2899",
     shadowOffset: { width: 2, height: 3 },
     shadowOpacity: 1,
     shadowRadius: 3,
