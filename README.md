@@ -1,50 +1,192 @@
-# Welcome to your Expo app 👋
+# Bright or Bite
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bright or Bite is a simple mobile app built with Expo and React Native. The app gives users two choices: receive a positive affirmation to brighten their day, or get a sharp insult for fun. Each mode has its own color theme and layout, designed to match the atmosphere.
 
-## Get started
+This project is suitable for beginners learning Expo, or anyone who wants a fun, lightweight mobile app.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+### 🔹 Affirmation Mode
+- Fetches affirmations from **affirmations.dev**
+- Soft and bright gradient background
+- “New Quote” button to load fresh affirmations
+- Copy-to-clipboard button with toast notification
 
-   ```bash
-   npx expo start
-   ```
+### 🔹 Insult Mode
+- Fetches insults from **evilinsult.com**
+- Dark gradient theme
+- “Hit Me Again” button to load new insults
+- Copy-to-clipboard with toast notification
 
-In the output, you'll find options to open the app in a
+### 🔹 Shared Features
+- Navigation using Expo Router
+- Clean, responsive UI
+- Smooth state handling with React Hooks
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📁 Folder Structure
+├── app/
+│ ├── index.tsx // Home screen
+│ ├── affirmation/
+│ │ └── index.tsx // Affirmation screen
+│ ├── insult/
+│ └── index.tsx // Insult screen
+├── assets/
+│ └── images/ // Logos, icons, UI images
+└── README.md--
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+# 🛠️ Installation & Setup Guide
 
-When you're ready, run:
+Below is the full step-by-step setup to make the app run smoothly.
 
+---
+
+## 1. Install Node.js & Git
+Make sure you have:
+
+- **Node.js 18+**
+- **Git**
+
+
+## 2. Instal Expo CLI
+Expo CLI allows you to run and build the app.
+
+- **npm install -g expo-cli**
+
+## 3. Clone the Project
+
+- **git clone <repo-url>**
+- **cd <project-folder>**
+
+## 4. Install Dependencies
+All dependencies needed by the app are declared in **package.json**.
+
+- **npm install**
+
+This will install:
+- expo-router
+- axios
+- expo-linear-gradient
+- expo-clipboard
+- react-native-safe-area-context
+
+and other necessary packages
+
+## 5. Start the App
+Run the project using Expo:
+
+- **npx expo start**
+
+Expo will give you:
+- A QR code (scan wuth Expo Go app)
+- Option to run on Android/IOS emulator
+- Browser dev tools
+
+---
+
+# 📡 API Setup (Important)
+
+This app uses two public APIs that do not require authentication.
+
+## Affirmation API
+
+- **[text](https://www.affirmations.dev/)**
+
+### Response with:
+
+- **{ "affirmation": "Your potential is endless." }**
+
+## Insult API
+
+- **{ "affirmation": "Your potential is endless." }**
+
+### Response with:
+
+- **{ "insult": "Sample insult message" }**
+
+
+## No API Keys Needed
+Just make sure the device/emulator has internet access.
+
+---
+
+---
+
+# 🧱 Running on Emulator
+
+## Android
+- 1. Install Android Studio
+- 2. Create an Android Virtual Device (AVD)
+- 3. Run the emulator
+- 4. Start Expo
+- **npx expo start**
+- 5. Press a in the terminal to open the app on the emulator
+
+## IOS
+- 1. Install Xcode
+- 2. Run IOS Simulator
+- 3. Start Expo
+- **npx expo start**
+- 5. Press i to open the app on iOS Simulator
+
+---
+
+---
+
+# 📦 Building the App (APK / IPA)
+To generate APK or iOS builds using Expo:
+
+- 1. Install EAS CLI
+- **npm install -g eas-cli**
+- 2. Login to expo
+- **eas login**
+- 3. Build APK (Android)
+- **eas build -p android --profile preview**
+- 4. Build for iOS (Mac only)
+- **eas build -p ios --profile preview**
+
+Expo will provide a download link when build is finished
+
+---
+
+---
+
+# 🎨 UI & Design Notes
+
+## Affirmation Mode
+- Light gradient
+- Poppins font
+- Soothing layout
+
+## Insult Mode
+- Dark gradient
+- Montserrat font
+- Slightly "edgy vibe"
+
+Design kept simple for better readability
+
+---
+
+---
+
+# 📜 License
+This project is open-source and can be used freely
+
+---
+
+--- 
+
+# 🙌 About the Project
+Bright or Bite was created as a small, fun mobile application that fits different moods. Whether someone wants motivation or a harsh joke, both options are available in one place.
+
+---
+This app uses two public APIs that do not require authentication.
+You can check by running:
 ```bash
-npm run reset-project
-```
+node -v
+git --version
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
