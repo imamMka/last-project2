@@ -29,7 +29,13 @@ export default function App() {
             style={styles.buttonLight}
             onPress={() => router.push("/affirmation")}
           >
-            <Text style={{ fontSize: 20, textAlign: "center" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "center",
+                fontFamily: "PoppinsBold",
+              }}
+            >
               Affirmation
             </Text>
           </TouchableOpacity>
@@ -43,18 +49,21 @@ export default function App() {
           style={styles.containerRight}
         >
           <Text style={styles.textRight}>Or do you want the harsh truth…?</Text>
-          <View style={styles.shadowWrapper}>
-            <TouchableOpacity
-              style={styles.buttonDark}
-              onPress={() => router.push("/insult")}
+          <TouchableOpacity
+            style={styles.buttonDark}
+            onPress={() => router.push("/insult")}
+          >
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "center",
+                color: "#EDEDED",
+                fontFamily: "PoppinsBold",
+              }}
             >
-              <Text
-                style={{ fontSize: 20, textAlign: "center", color: "#EDEDED" }}
-              >
-                Insult
-              </Text>
-            </TouchableOpacity>
-          </View>
+              Insult
+            </Text>
+          </TouchableOpacity>
         </LinearGradient>
       </View>
     </SafeAreaView>
@@ -89,11 +98,13 @@ const styles = {
     fontSize: 16,
     color: "#000000",
     textAlign: "center",
+    fontFamily: "PoppinsRegular",
   },
   textRight: {
     fontSize: 16,
     color: "#FFFFFF",
     textAlign: "center",
+    fontFamily: "PoppinsRegular",
   },
   buttonLight: {
     marginTop: 20,
@@ -110,12 +121,6 @@ const styles = {
     borderRadius: 12,
     shadowColor: "#8f00ff99",
     shadowOffset: { width: -2, height: -3 },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-  },
-  shadowWrapper: {
-    shadowColor: "#8a0f2899",
-    shadowOffset: { width: 2, height: 3 },
     shadowOpacity: 1,
     shadowRadius: 3,
   },

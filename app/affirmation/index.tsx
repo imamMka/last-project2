@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    fontFamily: "poppinsBold",
   },
 
   affirmation: {
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
     minHeight: 68,
     padding: 10,
     borderRadius: 6,
+    fontFamily: "poppinsRegular",
   },
 
   button: {

@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#EDEDED",
     textAlign: "center",
+    fontFamily: "MontserratBold",
   },
 
   insult: {
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     color: "#EDEDED",
+    fontFamily: "MontserratRegular",
   },
 
   button: {
