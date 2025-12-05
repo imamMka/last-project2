@@ -11,17 +11,18 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Clipboard from "expo-clipboard";
 
 export default function Affirmation() {
   const [afirmation, setAfirmation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const fetchAfirmation = async () => {
     try {
       setLoading(true);
       const response = await axios.get("https://www.affirmations.dev/");
       setAfirmation(response.data.affirmation);
-      setLoading(false);
     } catch (error) {
       setAfirmation("Failed to fetch affirmation");
       console.error(error);
@@ -36,8 +37,25 @@ export default function Affirmation() {
 
   const router = useRouter();
 
+  // Copy function + toast
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(afirmation);
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 1200);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Toast Notification */}
+      {copied && (
+        <View style={styles.copiedToast}>
+          <Text style={styles.copiedText}>Copied!</Text>
+        </View>
+      )}
+
       <View style={styles.navbar}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
@@ -51,19 +69,15 @@ export default function Affirmation() {
           source={require("@/assets/images/app-logo.png")}
         />
       </View>
+
       <LinearGradient
         colors={["#FBD6FF", "#FFFFFF", "#A3D8FF"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{
-          flex: 1,
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 20,
-        }}
+        style={styles.gradient}
       >
         <Text style={styles.title}>Welcome back, sunshine!</Text>
+
         <View style={styles.content}>
           <View style={styles.affirmationContainer}>
             {loading ? (
@@ -75,24 +89,14 @@ export default function Affirmation() {
             ) : (
               <Text style={styles.affirmation}>{afirmation}</Text>
             )}
-            <View
-              style={{
-                width: 38,
-                height: "100%",
-                minHeight: 68,
-                backgroundColor: "#FFFFFF",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: 10,
-                borderRadius: 6,
-              }}
-            >
+
+            {/* Copy Button */}
+            <TouchableOpacity onPress={copyToClipboard} style={styles.copyButton}>
               <Image
                 style={{ width: 18, height: 18 }}
                 source={require("@/assets/images/copy-icon-light.png")}
               />
-            </View>
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity style={styles.button} onPress={fetchAfirmation}>
@@ -111,60 +115,95 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f5f5f5",
   },
+
+  gradient: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
+
   affirmation: {
     fontSize: 18,
     textAlign: "left",
     backgroundColor: "#ffffff",
     width: 257,
-    height: "auto",
     minHeight: 68,
     padding: 10,
     borderRadius: 6,
   },
+
   button: {
     backgroundColor: "#BEE7FF",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    display: "flex",
     alignItems: "center",
     width: 261,
   },
+
   buttonText: {
     color: "#000000",
     fontSize: 15,
   },
+
   affirmationContainer: {
     backgroundColor: "#BEE7FF",
-    display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     padding: 8,
     borderRadius: 16,
     gap: 10,
-    height: "auto",
   },
+
   content: {
-    display: "flex",
     flexDirection: "column",
     gap: 49,
     alignItems: "center",
     justifyContent: "center",
   },
+
   navbar: {
     width: "100%",
     position: "absolute",
-    top: 45,
+    top: 60,
     zIndex: 10,
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
+  },
+
+  copyButton: {
+    width: 38,
+    minHeight: 68,
+    height: "100%",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 6,
+  },
+
+  copiedToast: {
+    position: "absolute",
+    top: 120,
+    backgroundColor: "#000000aa",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    zIndex: 999,
+  },
+
+  copiedText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600",
   },
 });

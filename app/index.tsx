@@ -1,12 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React from "react";
-import { useRouter } from "expo-router";
-
 
 export default function App() {
-const router = useRouter();
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.containerParent}>
@@ -26,7 +25,10 @@ const router = useRouter();
           style={styles.containerLeft}
         >
           <Text style={styles.textLeft}>Need Some Positivity Today.....?</Text>
-          <TouchableOpacity style={styles.buttonLight} onPress={() => router.push("/affirmation")}>
+          <TouchableOpacity
+            style={styles.buttonLight}
+            onPress={() => router.push("/affirmation")}
+          >
             <Text style={{ fontSize: 20, textAlign: "center" }}>
               Affirmation
             </Text>
@@ -42,7 +44,10 @@ const router = useRouter();
         >
           <Text style={styles.textRight}>Or do you want the harsh truth…?</Text>
           <View style={styles.shadowWrapper}>
-            <TouchableOpacity style={styles.buttonDark} onPress={() => router.push("/insult")}>
+            <TouchableOpacity
+              style={styles.buttonDark}
+              onPress={() => router.push("/insult")}
+            >
               <Text
                 style={{ fontSize: 20, textAlign: "center", color: "#EDEDED" }}
               >
@@ -59,7 +64,7 @@ const router = useRouter();
 const styles = {
   navbar: {
     position: "absolute",
-    top: 45,
+    top: 60,
     left: 20,
     zIndex: 10,
   },
